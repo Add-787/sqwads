@@ -20,5 +20,9 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Sqwads"
-include(":app")
- 
+include(":app:mobile")
+include(":feature:lineup")
+include(":feature:auction")
+include(":feature:auctions")
+include(":core:user")
+include(":core:ui")
