@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Sqwads"
 include(":app")
- 
+include(":feature:lineups")
