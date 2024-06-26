@@ -1,4 +1,10 @@
-package com.psyluckco.sqwads.ui.theme
+/**
+ * Created by developer on 26-06-2024.
+ * Tismo Technology Solutions (P) Ltd.
+ * developers@tismotech.net
+ */
+
+package com.psyluckco.design.theme
 
 import androidx.compose.ui.graphics.Color
 

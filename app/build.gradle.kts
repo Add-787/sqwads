@@ -40,6 +40,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -64,6 +65,7 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
+    implementation(project(":core:design"))
     kapt(libs.hilt.android.compiler)
     implementation(libs.androidx.annotation)
     implementation(libs.timber)
@@ -77,10 +79,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 }
 
-// Allow references to generated code
-//kapt {
-//    correctErrorTypes = true
-//}
+
 
 
 
