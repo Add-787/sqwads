@@ -66,6 +66,7 @@ dependencies {
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(project(":core:design"))
+    implementation(libs.androidx.core.splashscreen)
     kapt(libs.hilt.android.compiler)
     implementation(libs.androidx.annotation)
     implementation(libs.timber)

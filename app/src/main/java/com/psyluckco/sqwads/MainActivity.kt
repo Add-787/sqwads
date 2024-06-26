@@ -10,18 +10,39 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.psyluckco.sqwads.ui.theme.SqwadsTheme
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     val viewModel : MainActivityViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
-
+        val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
+
+        var uiState: MainActivityUiState by mutableStateOf(MainActivityUiState.Loading)
+
+        // Update the ui
+        lifecycleScope.launch {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+
+
+            }
+
+        }
+
 
         setContent {
             SqwadsTheme {

@@ -23,3 +23,5 @@ rootProject.name = "Sqwads"
 include(":app")
 include(":feature:lineups")
 include(":core:design")
+include(":core:data")
+include(":core:common")
