@@ -34,7 +34,7 @@ fun RowScope.SqwadsNavigationBarItem(
     modifier: Modifier = Modifier,
     alwaysShowLabel: Boolean = true,
     label: @Composable (() -> Unit)? = { Text("Item") },
-    icon: @Composable () -> Unit = { Icon(SqwadsIcons.Placeholder, contentDescription = null) }
+    icon: @Composable () -> Unit = { Icon(SqwadsIcons.PlaceHolder, contentDescription = null) }
 ) {
 
     NavigationBarItem(
