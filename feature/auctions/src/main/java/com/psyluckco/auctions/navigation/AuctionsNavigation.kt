@@ -6,5 +6,21 @@
 
 package com.psyluckco.auctions.navigation
 
-const val AUCTIONS_ROUTE = "auctions_route"
+import androidx.navigation.NavController
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavOptions
+import androidx.navigation.compose.composable
+import com.psyluckco.auctions.AuctionsRoute
 
+const val AUCTIONS_ROUTE = "auctions"
+
+fun NavController.navigateToAuctions(navOptions: NavOptions) = navigate(AUCTIONS_ROUTE, navOptions)
+
+fun NavGraphBuilder.auctionsScreen(
+    onRoomClicked: (String) -> Unit,
+    onShowSnackbar: suspend (String, String?) -> Boolean,
+) {
+    composable(route = AUCTIONS_ROUTE) {
+        AuctionsRoute()
+    }
+}

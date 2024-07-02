@@ -67,8 +67,8 @@ val LightColorScheme = lightColorScheme(
     onPrimary = Color.White,
     primaryContainer = Purple90,
     onPrimaryContainer = Purple10,
-    secondary = Orange40,
-    onSecondary = Color.White,
+    secondary = PurpleGray50,
+    onSecondary = Color.Black,
     secondaryContainer = Orange90,
     onSecondaryContainer = Orange10,
     tertiary = Blue40,
@@ -79,7 +79,7 @@ val LightColorScheme = lightColorScheme(
     onError = Color.White,
     errorContainer = Red90,
     onErrorContainer = Red10,
-    background = DarkPurpleGray99,
+    background = Color.White,
     onBackground = DarkPurpleGray10,
     surface = DarkPurpleGray99,
     onSurface = DarkPurpleGray10,
@@ -98,10 +98,10 @@ fun SqwadsTheme(
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
+//        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+//            val context = LocalContext.current
+//            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+//        }
 
         darkTheme -> DarkColorScheme
         else -> LightColorScheme

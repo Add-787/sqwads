@@ -24,6 +24,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.psyluckco.design.theme.SqwadsTheme
+import com.psyluckco.sqwads.ui.SqwadsApp
+import com.psyluckco.sqwads.ui.rememberSqwadsAppState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -50,31 +52,18 @@ class MainActivity : ComponentActivity() {
 
 
         setContent {
+            
+            val appState = rememberSqwadsAppState()
+            
             SqwadsTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    SqwadsApp(appState = appState)
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    SqwadsTheme {
-        Greeting("Android")
     }
 }

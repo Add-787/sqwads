@@ -68,6 +68,8 @@ dependencies {
     implementation(project(":core:design"))
     implementation(libs.androidx.core.splashscreen)
     implementation(project(":feature:lineups"))
+    implementation(project(":feature:auctions"))
+    implementation(project(":feature:profile"))
     kapt(libs.hilt.android.compiler)
     implementation(libs.androidx.annotation)
     implementation(libs.timber)

@@ -6,21 +6,35 @@
 
 package com.psyluckco.feature.lineups.ui
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.psyluckco.design.theme.SqwadsTheme
 import com.psyluckco.feature.lineups.R
 
 @Composable
 internal fun LineupsRoute(
-    onLineupClick : () -> Unit = {},
+    onLineupClick : (String) -> Unit = {},
     modifier : Modifier = Modifier,
     viewModel: LineupsViewModel = hiltViewModel()
 ) {
+
+    val lineupsState by viewModel.lineupsUiState.collectAsState()
+
     LineupsScreen(
-        lineupsUiState = LineupsUiState.Loading
+        lineupsUiState = lineupsState,
+        modifier = modifier
     )
 }
 @Composable
@@ -29,18 +43,29 @@ internal fun LineupsScreen(
     modifier: Modifier = Modifier
 ) {
 
-    if(lineupsUiState is LineupsUiState.Loading) {
-
-    }
+   Column(
+       modifier = modifier.fillMaxSize(),
+       verticalArrangement = Arrangement.Center,
+       horizontalAlignment = Alignment.CenterHorizontally
+   ) {
+       Text(
+           "This is Lineups Screen",
+           style = MaterialTheme.typography.headlineMedium,
+           fontWeight = FontWeight.Bold
+       )
+   }
 
 }
 
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-internal fun LineupsLoadingScreenPreview(
+internal fun LineupsScreenPreview(
     lineupsUiState: LineupsUiState = LineupsUiState.Loading
 ) {
 
+    SqwadsTheme {
+        LineupsScreen(lineupsUiState = LineupsUiState.Success(emptyList()))
+    }
 
 }
