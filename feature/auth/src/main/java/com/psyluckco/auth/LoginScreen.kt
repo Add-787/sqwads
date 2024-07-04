@@ -7,11 +7,13 @@
 package com.psyluckco.auth
 
 import androidx.annotation.VisibleForTesting
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -24,7 +26,9 @@ import com.psyluckco.design.theme.SqwadsTheme
 internal fun LoginRoute(
     modifier: Modifier = Modifier
 ) {
-    // LoginScreen()
+    LoginScreen(
+        modifier = modifier
+    )
 
 }
 
@@ -35,7 +39,9 @@ internal fun LoginScreen(
 ) {
 
     Column(
-        modifier = modifier.fillMaxSize()
+        modifier = modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
             "This is Login Screen",
