@@ -20,6 +20,7 @@ jetbrainsKotlinJvm = "1.9.0"
 uiToolingPreviewAndroid = "1.6.8"
 coreSplashscreen = "1.2.0-alpha01"
 kotlinx = "1.1.2"
+ktorClientAndroid = "3.0.0-beta-1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -46,6 +47,7 @@ material = { group = "com.google.android.material", name = "material", version.r
 androidx-ui-tooling-preview-android = { group = "androidx.compose.ui", name = "ui-tooling-preview-android", version.ref = "uiToolingPreviewAndroid" }
 androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "coreSplashscreen" }
 kotlinx = { group = "com.kotlinx", name = "kotlinx", version.ref = "kotlinx" }
+ktor-client-android = { group = "io.ktor", name = "ktor-client-android", version.ref = "ktorClientAndroid" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -55,4 +57,5 @@ hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 jetbrainsKotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
 androidDynamicFeature = { id = "com.android.dynamic-feature", version.ref = "agp" }
+kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin"}
 

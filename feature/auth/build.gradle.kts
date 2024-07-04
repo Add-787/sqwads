@@ -1,11 +1,10 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    alias(libs.plugins.kotlinSerialization)
 }
 
 android {
-    namespace = "com.psyluckco.data"
+    namespace = "com.psyluckco.login"
     compileSdk = 34
 
     defaultConfig {
@@ -24,6 +23,12 @@ android {
             )
         }
     }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.1"
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -37,13 +42,19 @@ dependencies {
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    implementation(libs.ktor.client.android)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(project(":core:design"))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    // Supabase dependencies
-    implementation(platform("io.github.jan-tennert.supabase:bom:2.5.1"))
-    implementation("io.github.jan-tennert.supabase:postgrest-kt")
+    implementation(libs.androidx.activity.compose)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.timber)
+    implementation(libs.androidx.material3)
+    implementation(libs.androidx.hilt.navigation.compose)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.ui.test.junit4)
+    debugImplementation(libs.androidx.ui.tooling)
+    debugImplementation(libs.androidx.ui.test.manifest)
 }

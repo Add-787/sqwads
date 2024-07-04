@@ -63,11 +63,11 @@ val DarkColorScheme = darkColorScheme(
  */
 @VisibleForTesting
 val LightColorScheme = lightColorScheme(
-    primary = Purple40,
+    primary = SqwadsBlue,
     onPrimary = Color.White,
     primaryContainer = Purple90,
     onPrimaryContainer = Purple10,
-    secondary = PurpleGray50,
+    secondary = SqwadsGrey,
     onSecondary = Color.Black,
     secondaryContainer = Orange90,
     onSecondaryContainer = Orange10,
