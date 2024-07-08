@@ -33,7 +33,7 @@ fun SqwadsNavHost(
         startDestination = startDestination
     ) {
 
-        lineupsScreen(onLineupClick = {})
+        lineupsScreen(onLineupClicked = {})
         auctionsScreen(onRoomClicked = {},onShowSnackbar = onShowSnackbar)
         profileScreen()
 

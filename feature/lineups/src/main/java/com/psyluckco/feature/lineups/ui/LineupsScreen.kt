@@ -25,7 +25,7 @@ import com.psyluckco.feature.lineups.R
 
 @Composable
 internal fun LineupsRoute(
-    onLineupClick : (String) -> Unit = {},
+    onLineupClicked : (String) -> Unit = {},
     modifier : Modifier = Modifier,
     viewModel: LineupsViewModel = hiltViewModel()
 ) {

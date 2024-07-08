@@ -21,16 +21,14 @@ class TestUserRepository : UserRepository {
     override val user: Flow<User>
         get() = _user.filterNotNull()
 
-    override suspend fun login(username: String, password: String) : Boolean {
+    override suspend fun login(username: String, password: String) {
         delay(1000)
         _user.emit(User(username = username))
-        return true
     }
 
-    override suspend fun signup(username: String, email: String, password: String) : Boolean {
+    override suspend fun signup(username: String, email: String, password: String) {
         delay(1000)
         _user.emit(User(username = username))
-        return true
     }
 
     override suspend fun logout() {

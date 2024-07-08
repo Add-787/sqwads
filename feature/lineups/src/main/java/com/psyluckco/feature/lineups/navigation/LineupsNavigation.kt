@@ -17,11 +17,11 @@ const val LINEUPS_ROUTE = "lineups"
 fun NavController.navigateToLineups(navOptions: NavOptions) = navigate(LINEUPS_ROUTE, navOptions)
 
 fun NavGraphBuilder.lineupsScreen(
-    onLineupClick: (String) -> Unit,
+    onLineupClicked: (String) -> Unit,
 ) {
     composable(route = LINEUPS_ROUTE) {
         LineupsRoute(
-            onLineupClick = onLineupClick
+            onLineupClicked = onLineupClicked
         )
     }
 }
