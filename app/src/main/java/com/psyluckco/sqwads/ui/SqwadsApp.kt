@@ -35,8 +35,7 @@ fun SqwadsApp(
             SqwadsNavigationBar {
                 appState.topLevelDestinations.forEach {
                     topLevelDestination ->
-
-                    val selected = currentDestination.isTopLevelDestinationInHierarchy(topLevelDestination)
+                        val selected = currentDestination.isTopLevelDestinationInHierarchy(topLevelDestination)
 
                     SqwadsNavigationBarItem(
                         onClick = { appState.navigateToTopLevelDestination(topLevelDestination) },

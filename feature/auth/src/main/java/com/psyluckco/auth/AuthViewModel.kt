@@ -45,10 +45,6 @@ class AuthViewModel @Inject constructor(
         }
     }
 
-
-
-
-
 }
 
 sealed interface AuthUiState {

@@ -9,11 +9,13 @@ package com.psyluckco.auth
 import androidx.annotation.VisibleForTesting
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -26,7 +28,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -39,6 +46,8 @@ import com.psyluckco.design.components.SqwadsLoadingDialog
 import com.psyluckco.design.components.SqwadsTextField
 import com.psyluckco.design.icons.SqwadsIcons
 import com.psyluckco.design.theme.SqwadsTheme
+import org.w3c.dom.Text
+import timber.log.Timber
 
 @Composable
 internal fun LoginRoute(
@@ -81,8 +90,8 @@ internal fun LoginScreen(
 
             Column(
                 modifier = modifier
-                    .height(450.dp)
-                    .padding(horizontal = 51.dp)
+                    .height(575.dp)
+                    .padding(horizontal = 49.dp)
                     .fillMaxWidth(),
                 verticalArrangement = Arrangement.SpaceAround
             ) {
@@ -128,6 +137,34 @@ internal fun LoginScreen(
                         .fillMaxWidth(),
                     text = "Login"
                 )
+
+                Row(
+                    modifier = modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    val annotatedText = buildAnnotatedString {
+                        append("Don't have an account?\n")
+
+                        withStyle(
+                            style = SpanStyle(
+                                color = MaterialTheme.colorScheme.primary,
+                                textDecoration = TextDecoration.Underline
+                            )
+                        ) {
+                            append("Sign up")
+                        }
+
+                    }
+
+                    ClickableText(
+                        text = annotatedText,
+                        style = MaterialTheme.typography.labelMedium.copy(textAlign = TextAlign.Center)
+                    ) {
+                        Timber.i("Navigate to sign up page")
+                    }
+
+                }
+
 
             }
 

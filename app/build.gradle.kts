@@ -70,6 +70,8 @@ dependencies {
     implementation(project(":feature:lineups"))
     implementation(project(":feature:auctions"))
     implementation(project(":feature:profile"))
+    implementation(project(":core:data"))
+    implementation(project(":feature:auth"))
     kapt(libs.hilt.android.compiler)
     implementation(libs.androidx.annotation)
     implementation(libs.timber)

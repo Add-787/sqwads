@@ -23,31 +23,35 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.psyluckco.auth.AuthUiState
+import com.psyluckco.auth.AuthViewModel
 import com.psyluckco.design.theme.SqwadsTheme
 import com.psyluckco.sqwads.ui.SqwadsApp
 import com.psyluckco.sqwads.ui.rememberSqwadsAppState
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    val viewModel : MainActivityViewModel by viewModels()
+    val viewModel : AuthViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
 
-
-        var uiState: MainActivityUiState by mutableStateOf(MainActivityUiState.Loading)
-
         // Update the ui
         lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
 
-
             }
+        }
 
+        splashScreen.setKeepOnScreenCondition {
+            true
         }
 
 
