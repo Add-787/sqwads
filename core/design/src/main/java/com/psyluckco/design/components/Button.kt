@@ -9,12 +9,14 @@ package com.psyluckco.design.components
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedIconButton
 import androidx.compose.material3.Text
@@ -32,7 +34,8 @@ import com.psyluckco.design.theme.SqwadsTheme
 
 @Composable
 fun SqwadsButton(
-    modifier : Modifier = Modifier,
+    modifier : Modifier = Modifier.fillMaxWidth(),
+    text : String = "Click",
     onClick: () -> Unit = { } ,
     enabled: Boolean = true
 ) {
@@ -43,7 +46,7 @@ fun SqwadsButton(
         enabled = enabled,
         shape = RoundedCornerShape(7.dp)
     ) {
-        Text("Click")
+        Text(text = text)
     }
 
 }
@@ -62,16 +65,6 @@ fun SqwadsOutlinedIconButton(
     onClick : () -> Unit = {},
     content: @Composable () -> Unit
 ) {
-
-//    IconButton(
-//        modifier = modifier.border(width = 1.dp, color = SqwadsGrey),
-//        onClick = onClick,
-//        colors = IconButtonDefaults.iconButtonColors(
-//            containerColor = Color.Transparent,
-//        ),
-//
-//        content = content
-//    )
 
     OutlinedButton(
         onClick = { /*TODO*/ },
@@ -94,6 +87,13 @@ private fun SqwadsOutlinedIconPreview() {
         }
     }
     
+}
+
+object SqwadsButtonDefaults {
+    @Composable
+    fun buttonContainerColor() = MaterialTheme.colorScheme.background
+
+
 }
 
 
