@@ -26,16 +26,16 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
-    private val userRepository: UserRepository
+    val userRepository: UserRepository
 ) : ViewModel() {
 
     val authUiState: StateFlow<AuthUiState> = userRepository
         .user.map<User,AuthUiState>(AuthUiState::Success)
-        .onStart { emit(AuthUiState.Success(User(username = "guest"))) }
+        .onStart { emit(AuthUiState.Success(user = userRepository.currentUser)) }
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5_000),
-            initialValue = AuthUiState.Success(User(username = "guest"))
+            initialValue = AuthUiState.Success(user = userRepository.currentUser)
         )
 
     fun login(username : String, password : String) : Flow<AuthUiState> = flow {

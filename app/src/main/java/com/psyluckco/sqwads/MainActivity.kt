@@ -25,7 +25,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.psyluckco.auth.AuthUiState
 import com.psyluckco.auth.AuthViewModel
+import com.psyluckco.data.models.User
+import com.psyluckco.data.repository.UserRepository
 import com.psyluckco.design.theme.SqwadsTheme
+import com.psyluckco.sqwads.MainActivityUiState.*
 import com.psyluckco.sqwads.ui.SqwadsApp
 import com.psyluckco.sqwads.ui.rememberSqwadsAppState
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,31 +36,43 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    val viewModel : AuthViewModel by viewModels()
+    val viewModel : MainActivityViewModel by viewModels()
+
+    @Inject
+    lateinit var userRepository: UserRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
 
+        var uiState: MainActivityUiState by mutableStateOf(Loading)
+
         // Update the ui
         lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiState
+                    .onEach { uiState = it }
+                    .collect()
 
             }
         }
 
-        splashScreen.setKeepOnScreenCondition {
-            true
-        }
+//        splashScreen.setKeepOnScreenCondition {
+//            when(uiState) {
+//                Loading -> true
+//                is Success -> false
+//            }
+//        }
 
 
         setContent {
             
-            val appState = rememberSqwadsAppState()
+            val appState = rememberSqwadsAppState(userRepository = userRepository)
             
             SqwadsTheme {
                 // A surface container using the 'background' color from the theme

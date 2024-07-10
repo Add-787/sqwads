@@ -20,6 +20,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.psyluckco.design.components.SqwadsLoadingDialog
 import com.psyluckco.design.theme.SqwadsTheme
 import com.psyluckco.feature.lineups.R
 
@@ -30,10 +31,10 @@ internal fun LineupsRoute(
     viewModel: LineupsViewModel = hiltViewModel()
 ) {
 
-    val lineupsState by viewModel.lineupsUiState.collectAsState()
+    // val lineupsState by viewModel.lineupsUiState.collectAsState()
 
     LineupsScreen(
-        lineupsUiState = lineupsState,
+        lineupsUiState = LineupsUiState.Success(emptyList()),
         modifier = modifier
     )
 }
@@ -48,11 +49,17 @@ internal fun LineupsScreen(
        verticalArrangement = Arrangement.Center,
        horizontalAlignment = Alignment.CenterHorizontally
    ) {
-       Text(
-           "This is Lineups Screen",
-           style = MaterialTheme.typography.headlineMedium,
-           fontWeight = FontWeight.Bold
-       )
+       if(lineupsUiState is LineupsUiState.Loading)
+       {
+           SqwadsLoadingDialog(loadingMsg = "Loading user Lineups")
+       } else if(lineupsUiState is LineupsUiState.Success) {
+           Text(
+               "This is Lineups Screen",
+               style = MaterialTheme.typography.headlineMedium,
+               fontWeight = FontWeight.Bold
+           )
+       }
+
    }
 
 }

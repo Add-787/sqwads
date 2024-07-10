@@ -13,22 +13,28 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.last
+import javax.inject.Inject
 
-val guest = User(username = "Unknown")
-class TestUserRepository : UserRepository {
+val guest = User(id = "",username = "unknown")
+val testUser = User(id="123", username = "TestUser")
+
+class TestUserRepository @Inject constructor() : UserRepository {
 
     private val _user = MutableSharedFlow<User>(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
     override val user: Flow<User>
         get() = _user.filterNotNull()
 
+    override val currentUser get() = _user.replayCache.firstOrNull() ?: guest
+
     override suspend fun login(username: String, password: String) {
         delay(1000)
-        _user.emit(User(username = username))
+        _user.emit(testUser)
     }
 
     override suspend fun signup(username: String, email: String, password: String) {
         delay(1000)
-        _user.emit(User(username = username))
+        _user.emit(testUser)
     }
 
     override suspend fun logout() {

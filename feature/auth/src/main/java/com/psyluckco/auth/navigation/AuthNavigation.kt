@@ -13,7 +13,7 @@ import androidx.navigation.navigation
 
 const val AUTH_ROUTE = "auth"
 
-fun NavController.navigateToAuth(navOptions: NavOptions) = navigate(AUTH_ROUTE, navOptions)
+fun NavController.navigateToAuth(navOptions: NavOptions?) = navigate(AUTH_ROUTE, navOptions)
 
 fun NavGraphBuilder.authScreens() {
 

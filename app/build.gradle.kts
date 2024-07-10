@@ -72,6 +72,8 @@ dependencies {
     implementation(project(":feature:profile"))
     implementation(project(":core:data"))
     implementation(project(":feature:auth"))
+    implementation(project(":feature:auth"))
+    implementation(project(":core:testing"))
     kapt(libs.hilt.android.compiler)
     implementation(libs.androidx.annotation)
     implementation(libs.timber)

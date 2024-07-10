@@ -7,8 +7,16 @@
 package com.psyluckco.sqwads.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import com.psyluckco.auth.navigation.authScreens
 
 @Composable
-fun AuthNavHost() {
+fun AuthNavHost(
+    navHostController: NavHostController
+) {
+    NavHost(navController = navHostController, startDestination = "") {
+        authScreens()
+    }
     
 }

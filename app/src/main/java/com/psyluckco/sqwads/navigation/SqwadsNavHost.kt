@@ -12,6 +12,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.psyluckco.auctions.navigation.AUCTIONS_ROUTE
 import com.psyluckco.auctions.navigation.auctionsScreen
+import com.psyluckco.auth.navigation.authScreens
 import com.psyluckco.feature.lineups.navigation.LINEUPS_ROUTE
 import com.psyluckco.feature.lineups.navigation.lineupsScreen
 import com.psyluckco.profile.navigation.profileScreen
@@ -22,7 +23,7 @@ fun SqwadsNavHost(
     appState: SqwadsAppState,
     onShowSnackbar: suspend (String,String?) -> Boolean,
     modifier: Modifier,
-    startDestination: String = LINEUPS_ROUTE
+    startDestination: String
 ) {
 
     val navController = appState.navController
@@ -36,6 +37,8 @@ fun SqwadsNavHost(
         lineupsScreen(onLineupClicked = {})
         auctionsScreen(onRoomClicked = {},onShowSnackbar = onShowSnackbar)
         profileScreen()
+
+        authScreens()
 
     }
 

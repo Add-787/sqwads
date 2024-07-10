@@ -18,6 +18,9 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import com.psyluckco.auctions.navigation.AUCTIONS_ROUTE
 import com.psyluckco.auctions.navigation.navigateToAuctions
+import com.psyluckco.auth.navigation.navigateToAuth
+import com.psyluckco.data.models.User
+import com.psyluckco.data.repository.UserRepository
 import com.psyluckco.feature.lineups.navigation.navigateToLineups
 import com.psyluckco.profile.navigation.navigateToProfile
 import com.psyluckco.sqwads.navigation.TopLevelDestination
@@ -25,20 +28,22 @@ import kotlinx.coroutines.CoroutineScope
 
 @Composable
 fun rememberSqwadsAppState(
+    userRepository: UserRepository,
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
     navController: NavHostController = rememberNavController()
 ) : SqwadsAppState {
 
     return remember(
-        navController,coroutineScope
+        userRepository, navController, coroutineScope
     ) {
-        SqwadsAppState(navController,coroutineScope)
+        SqwadsAppState(userRepository, navController, coroutineScope)
     }
 
 
 }
 @Stable
 class SqwadsAppState(
+    val userRepository: UserRepository,
     val navController : NavHostController,
     coroutineScope: CoroutineScope
 ) {
@@ -70,6 +75,9 @@ class SqwadsAppState(
         }
     }
 
+    val isLoggedIn : Boolean
+        get() = userRepository.currentUser.id.isNotEmpty()
 
+    fun navigateToAuth() = navController.navigateToAuth(navOptions = null)
 
 }

@@ -72,13 +72,6 @@ internal fun LoginScreen(
     navigateToLineups: () -> Unit = {}
 ) {
 
-    LaunchedEffect(key1 = authUiState) {
-        if(authUiState is AuthUiState.Success && authUiState.user.username != "guest")
-        {
-            navigateToLineups()
-        }
-    }
-
     Column(
         modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -119,7 +112,7 @@ internal fun LoginScreen(
 
                 SqwadsTextField(
                     value = email,
-                    onValueChange = { it -> password = it },
+                    onValueChange = { it -> email = it },
                     trailingIcon = { Icon(imageVector = SqwadsIcons.Email, contentDescription = null)}
                 )
 
@@ -179,7 +172,7 @@ internal fun LoginScreen(
 private fun LoginScreenPreview() {
     SqwadsTheme {
         LoginScreen(
-            authUiState = AuthUiState.Success(user = User(username = "user1"))
+            authUiState = AuthUiState.Success(user = User(id = "436", username = "user1"))
         )
     }
 }

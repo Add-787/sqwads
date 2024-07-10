@@ -8,12 +8,13 @@ package com.psyluckco.auth.navigation
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import com.psyluckco.auth.LoginRoute
 
 const val LOGIN_ROUTE = "login"
 
 fun NavGraphBuilder.loginScreen() {
 
     composable(route = LOGIN_ROUTE) {
-        // LoginRoute()
+        LoginRoute()
     }
 }
