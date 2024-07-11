@@ -12,6 +12,7 @@ import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.last
 import javax.inject.Inject
@@ -21,7 +22,7 @@ val testUser = User(id="123", username = "TestUser")
 
 class TestUserRepository @Inject constructor() : UserRepository {
 
-    private val _user = MutableSharedFlow<User>(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
+    private val _user = MutableStateFlow(value = guest)
     override val user: Flow<User>
         get() = _user.filterNotNull()
 

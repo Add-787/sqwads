@@ -52,14 +52,23 @@ import timber.log.Timber
 @Composable
 internal fun LoginRoute(
     modifier: Modifier = Modifier,
-    viewModel: AuthViewModel = hiltViewModel()
+    viewModel: AuthViewModel = hiltViewModel(),
+    navigateToLineups: () -> Unit = {},
+    navigateToSignup: () -> Unit = {}
 ) {
 
     val authUiState by viewModel.authUiState.collectAsState()
 
+    LaunchedEffect(key1 = authUiState) {
+        if(authUiState is AuthUiState.Authenticated) {
+            navigateToLineups()
+        }
+    }
+
     LoginScreen(
         authUiState = authUiState,
-        modifier = modifier
+        modifier = modifier,
+        navigateToSignup = navigateToSignup
     )
 
 }
@@ -69,7 +78,8 @@ internal fun LoginRoute(
 internal fun LoginScreen(
     authUiState: AuthUiState,
     modifier: Modifier = Modifier,
-    navigateToLineups: () -> Unit = {}
+    navigateToLineups: () -> Unit = {},
+    navigateToSignup: () -> Unit = {}
 ) {
 
     Column(
@@ -80,7 +90,6 @@ internal fun LoginScreen(
         if(authUiState is AuthUiState.Loading) {
             SqwadsLoadingDialog(loadingMsg = authUiState.message)
         } else {
-
             Column(
                 modifier = modifier
                     .height(575.dp)
@@ -107,8 +116,6 @@ internal fun LoginScreen(
                         color = MaterialTheme.colorScheme.secondary
                     )
                 }
-                
-
 
                 SqwadsTextField(
                     value = email,
@@ -172,7 +179,7 @@ internal fun LoginScreen(
 private fun LoginScreenPreview() {
     SqwadsTheme {
         LoginScreen(
-            authUiState = AuthUiState.Success(user = User(id = "436", username = "user1"))
+            authUiState = AuthUiState.Unauthenticated(error = null)
         )
     }
 }

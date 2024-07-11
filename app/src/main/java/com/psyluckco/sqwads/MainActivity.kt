@@ -62,12 +62,12 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-//        splashScreen.setKeepOnScreenCondition {
-//            when(uiState) {
-//                Loading -> true
-//                is Success -> false
-//            }
-//        }
+        splashScreen.setKeepOnScreenCondition {
+            when(uiState) {
+                Loading -> true
+                is Success -> false
+            }
+        }
 
 
         setContent {
