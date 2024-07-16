@@ -12,6 +12,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -26,44 +29,43 @@ import com.psyluckco.sqwads.navigation.TopLevelDestination
 @Composable
 fun SqwadsApp(
     appState : SqwadsAppState,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
 
     val currentDestination = appState.currentDestination
 
-    if(!appState.isLoggedIn) {
+    val loggedIn by appState.isLoggedIn.collectAsState()
+
+    LaunchedEffect(key1 = loggedIn) {
+        if(!loggedIn) {
+            appState.navigateToAuth()
+        }
+    }
+
+    Scaffold(
+        modifier = modifier,
+        bottomBar = {
+            SqwadsNavigationBar {
+                appState.topLevelDestinations.forEach {
+                        topLevelDestination ->
+                    val selected = currentDestination.isTopLevelDestinationInHierarchy(topLevelDestination)
+
+                    SqwadsNavigationBarItem(
+                        onClick = { appState.navigateToTopLevelDestination(topLevelDestination) },
+                        label = { Text(topLevelDestination.name, style = MaterialTheme.typography.labelSmall) },
+                        icon = { Icon(SqwadsIcons.PlaceHolder, contentDescription = null) },
+                        selected = selected
+                    )
+                }
+            }
+        }
+    ) {
         SqwadsNavHost(
             appState = appState,
             onShowSnackbar = { _, _ -> false },
-            modifier = modifier,
-            startDestination = AUTH_ROUTE
+            modifier = modifier.padding(it),
+            startDestination = LINEUPS_ROUTE
         )
-    } else {
-        Scaffold(
-            modifier = modifier,
-            bottomBar = {
-                SqwadsNavigationBar {
-                    appState.topLevelDestinations.forEach {
-                            topLevelDestination ->
-                        val selected = currentDestination.isTopLevelDestinationInHierarchy(topLevelDestination)
-
-                        SqwadsNavigationBarItem(
-                            onClick = { appState.navigateToTopLevelDestination(topLevelDestination) },
-                            label = { Text(topLevelDestination.name, style = MaterialTheme.typography.labelSmall) },
-                            icon = { Icon(SqwadsIcons.PlaceHolder, contentDescription = null) },
-                            selected = selected
-                        )
-                    }
-                }
-            }
-        ) {
-            SqwadsNavHost(
-                appState = appState,
-                onShowSnackbar = { _, _ -> false },
-                modifier = modifier.padding(it),
-                startDestination = LINEUPS_ROUTE
-            )
-        }
     }
 
 }

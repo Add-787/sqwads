@@ -12,9 +12,15 @@ import com.psyluckco.auth.LoginRoute
 
 const val LOGIN_ROUTE = "login"
 
-fun NavGraphBuilder.loginScreen() {
+fun NavGraphBuilder.loginScreen(
+    navigateToSignup: () -> Unit  = { },
+    navigateToLineups: () -> Unit = {}
+) {
 
     composable(route = LOGIN_ROUTE) {
-        LoginRoute()
+        LoginRoute(
+            navigateToSignup = navigateToSignup,
+            navigateToLineups = navigateToLineups
+        )
     }
 }

@@ -38,7 +38,9 @@ fun SqwadsNavHost(
         auctionsScreen(onRoomClicked = {},onShowSnackbar = onShowSnackbar)
         profileScreen()
 
-        authScreens()
+        authScreens(
+            navController = navController
+        )
 
     }
 

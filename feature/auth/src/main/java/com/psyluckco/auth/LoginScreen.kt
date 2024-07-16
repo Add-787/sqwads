@@ -37,23 +37,18 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.navigation
-import com.psyluckco.auth.navigation.loginScreen
-import com.psyluckco.data.models.User
 import com.psyluckco.design.components.SqwadsButton
 import com.psyluckco.design.components.SqwadsLoadingDialog
 import com.psyluckco.design.components.SqwadsTextField
 import com.psyluckco.design.icons.SqwadsIcons
 import com.psyluckco.design.theme.SqwadsTheme
-import org.w3c.dom.Text
 import timber.log.Timber
 
 @Composable
 internal fun LoginRoute(
     modifier: Modifier = Modifier,
     viewModel: AuthViewModel = hiltViewModel(),
-    navigateToLineups: () -> Unit = {},
+    navigateToLineups: () -> Unit = { Timber.i(" Navigate to lineups page")},
     navigateToSignup: () -> Unit = {}
 ) {
 
@@ -68,6 +63,7 @@ internal fun LoginRoute(
     LoginScreen(
         authUiState = authUiState,
         modifier = modifier,
+        onLoginClicked = viewModel::login,
         navigateToSignup = navigateToSignup
     )
 
@@ -78,7 +74,7 @@ internal fun LoginRoute(
 internal fun LoginScreen(
     authUiState: AuthUiState,
     modifier: Modifier = Modifier,
-    navigateToLineups: () -> Unit = {},
+    onLoginClicked: (String,String) -> Unit = { _,_ ->  },
     navigateToSignup: () -> Unit = {}
 ) {
 
@@ -135,7 +131,8 @@ internal fun LoginScreen(
                     modifier = modifier
                         .height(47.dp)
                         .fillMaxWidth(),
-                    text = "Login"
+                    text = "Login",
+                    onClick = { onLoginClicked(email,password) }
                 )
 
                 Row(
@@ -160,7 +157,7 @@ internal fun LoginScreen(
                         text = annotatedText,
                         style = MaterialTheme.typography.labelMedium.copy(textAlign = TextAlign.Center)
                     ) {
-                        Timber.i("Navigate to sign up page")
+                        navigateToSignup()
                     }
 
                 }
@@ -179,7 +176,7 @@ internal fun LoginScreen(
 private fun LoginScreenPreview() {
     SqwadsTheme {
         LoginScreen(
-            authUiState = AuthUiState.Unauthenticated(error = null)
+            authUiState = AuthUiState.Unauthenticated
         )
     }
 }

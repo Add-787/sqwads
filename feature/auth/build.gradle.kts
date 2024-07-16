@@ -62,5 +62,4 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     kapt(libs.hilt.android.compiler)
-    implementation(libs.hilt.android.compiler)
 }

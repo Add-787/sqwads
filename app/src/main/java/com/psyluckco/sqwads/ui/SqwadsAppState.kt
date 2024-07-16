@@ -25,6 +25,12 @@ import com.psyluckco.feature.lineups.navigation.navigateToLineups
 import com.psyluckco.profile.navigation.navigateToProfile
 import com.psyluckco.sqwads.navigation.TopLevelDestination
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 
 @Composable
 fun rememberSqwadsAppState(
@@ -75,8 +81,15 @@ class SqwadsAppState(
         }
     }
 
-    val isLoggedIn : Boolean
-        get() = userRepository.currentUser.id.isNotEmpty()
+    val isLoggedIn : StateFlow<Boolean> = userRepository
+        .user
+        .map { u -> u.id.isNotEmpty() }
+        .stateIn(
+            scope = coroutineScope,
+            initialValue = false,
+            started = SharingStarted.WhileSubscribed(5_000),
+        )
+
 
     fun navigateToAuth() = navController.navigateToAuth(navOptions = null)
 
