@@ -23,6 +23,7 @@ import com.psyluckco.design.components.SqwadsNavigationBar
 import com.psyluckco.design.components.SqwadsNavigationBarItem
 import com.psyluckco.design.icons.SqwadsIcons
 import com.psyluckco.feature.lineups.navigation.LINEUPS_ROUTE
+import com.psyluckco.sqwads.navigation.AuthNavHost
 import com.psyluckco.sqwads.navigation.SqwadsNavHost
 import com.psyluckco.sqwads.navigation.TopLevelDestination
 
@@ -32,45 +33,17 @@ fun SqwadsApp(
     modifier: Modifier = Modifier,
 ) {
 
-    val currentDestination = appState.currentDestination
-
     val loggedIn by appState.isLoggedIn.collectAsState()
 
-    LaunchedEffect(key1 = loggedIn) {
-        if(!loggedIn) {
-            appState.navigateToAuth()
-        }
-    }
-
-    Scaffold(
-        modifier = modifier,
-        bottomBar = {
-            SqwadsNavigationBar {
-                appState.topLevelDestinations.forEach {
-                        topLevelDestination ->
-                    val selected = currentDestination.isTopLevelDestinationInHierarchy(topLevelDestination)
-
-                    SqwadsNavigationBarItem(
-                        onClick = { appState.navigateToTopLevelDestination(topLevelDestination) },
-                        label = { Text(topLevelDestination.name, style = MaterialTheme.typography.labelSmall) },
-                        icon = { Icon(SqwadsIcons.PlaceHolder, contentDescription = null) },
-                        selected = selected
-                    )
-                }
-            }
-        }
-    ) {
+    if(!loggedIn) {
+        AuthNavHost(appState = appState, modifier = modifier)
+    } else {
         SqwadsNavHost(
             appState = appState,
-            onShowSnackbar = { _, _ -> false },
-            modifier = modifier.padding(it),
+            onShowSnackbar = { _,_ -> false},
+            modifier = modifier,
             startDestination = LINEUPS_ROUTE
         )
     }
 
 }
-
-private fun NavDestination?.isTopLevelDestinationInHierarchy(destination: TopLevelDestination) =
-    this?.hierarchy?.any {
-        it.route?.contains(destination.name, true) ?: false
-    } ?: false
